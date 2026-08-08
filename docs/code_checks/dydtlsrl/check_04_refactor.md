@@ -11,9 +11,9 @@
 - 관련 파일: notebooks/02_analysis.ipynb, src/analysis.py
 
 ## 3. 코드 목적
-A(문길래)가 만든 공통 데이터 로딩 함수(load_all_data)를 재사용해 중복 코드를
-제거하고, customers 데이터를 병합에 추가해 도시/성별/나이 정보도 
-분석에 활용할 수 있도록 한다.
+데이터 전처리 과정에서 만든 공통 데이터 로딩 함수(load_all_data)를 
+재사용해 중복 코드를 제거하고, customers 데이터를 병합에 추가해 
+도시/성별/나이 정보도 분석에 활용할 수 있도록 한다.
 
 ## 4. 입력
 data/raw/customers.csv, orders.csv, order_items.csv, products.csv
