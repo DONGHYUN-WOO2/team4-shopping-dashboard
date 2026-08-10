@@ -7,8 +7,8 @@
 
 | 작성자 | 활용 목적 | 활용 도구 | 비고 |
 |---|---|---|---|
-| github_id_1 | CSV 구조 점검, 데이터 로딩 함수 작성, 병합/전처리 코드 작성 | Claude | 검증 기록: code_checks/github_id_1/ |
-| github_id_2 | | | |
+| github_id_1 | CSV 구조 점검, 데이터 로딩 함수 작성, 병합/전처리 코드 작성 | Claude | 검증 기록: code_checks/a_choi/ |
+| github_dydtlsrl | 주문 데이터 병합, 핵심 지표(총매출/평균주문금액 등) 계산, 카테고리별·월별 매출 집계, A의 공통 로딩 함수 재사용 리팩터링 | Claude | 검증 기록: code_checks/a_yang |
 | github_id_3 | | | |
 | github_id_4 | | | |
 
