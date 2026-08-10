@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import streamlit as st
 from pathlib import Path
 
@@ -22,7 +24,7 @@ merged_df = load_merged_data(DATA_DIR)
 
 #Streamlit 기본 화면을 만들고 프로젝트 제목과 설명 표시하기
 st.set_page_config(
-    page_title="쇼핑 데이터 분석 대시보드",
+    page_title="쇼핑몰 데이터 분석 대시보드",
     page_icon="🛒",
     layout="wide",
 )
@@ -98,9 +100,39 @@ monthly_sales = calculate_monthly_sales(filtered_df)
 st.subheader("카테고리별 매출")
 show_category_sales_chart(category_sales)
 
+if not category_sales.empty:
+    highest = category_sales.iloc[0]
+    lowest = category_sales.iloc[-1]
+
+    st.write(
+        f"가장 높은 매출을 기록한 카테고리는 {highest['category']}이며, "
+        f"매출은 {highest['total_sales']:,.0f}원입니다. "
+        f"가장 낮은 매출을 기록한 카테고리는 {lowest['category']}이며, "
+        f"매출은 {lowest['total_sales']:,.0f}원입니다. "
+        "카테고리별 매출 규모에 차이가 있음을 확인할 수 있습니다. "
+        "다만 이 결과만으로 매출 차이의 원인을 판단하기는 어렵습니다."
+    )
+
+
 st.subheader("월별 주문 금액")
 show_monthly_sales_chart(monthly_sales)
 
+if not monthly_sales.empty:
+    highest_month = monthly_sales.loc[
+        monthly_sales["total_sales"].idxmax()
+    ]
+    lowest_month = monthly_sales.loc[
+        monthly_sales["total_sales"].idxmin()
+    ]
+
+    st.write(
+        f"매출이 가장 높은 달은 {highest_month['order_month']}이며, "
+        f"매출은 {highest_month['total_sales']:,.0f}원입니다. "
+        f"매출이 가장 낮은 달은 {lowest_month['order_month']}이며, "
+        f"매출은 {lowest_month['total_sales']:,.0f}원입니다. "
+        "월별로 매출 규모가 달라지는 패턴을 확인할 수 있습니다. "
+        "다만 현재 데이터만으로 매출 변화의 구체적인 원인을 판단하기는 어렵습니다."
+    )
 
 #필터 결과를 표로 표시
 st.subheader("필터 확인")
