@@ -5,21 +5,21 @@ Streamlit 앱(app.py)에서 이 함수들을 import해서 재사용한다.
 
 import pandas as pd
 from pathlib import Path
+from src.data_loader import load_all_data
 
 
-def load_merged_data(data_dir: Path) -> pd.DataFrame:
+def load_merged_data(data_dir: Path = None) -> pd.DataFrame:
     """
-    order_items, orders, products를 불러와 병합한 데이터를 반환한다.
-    item_amount 컬럼(quantity * unit_price)도 함께 계산한다.
+    A(data_loader)의 load_all_data()를 재사용해 4개 데이터를 불러오고,
+    item_amount 계산 후 order_items + orders + products + customers를 병합한다.
     """
-    order_items = pd.read_csv(data_dir / "order_items.csv")
-    orders = pd.read_csv(data_dir / "orders.csv")
-    products = pd.read_csv(data_dir / "products.csv")
+    customers, orders, order_items, products = load_all_data(data_dir)
 
     order_items["item_amount"] = order_items["quantity"] * order_items["unit_price"]
 
     merged = order_items.merge(orders, on="order_id", how="left")
     merged = merged.merge(products, on="product_id", how="left")
+    merged = merged.merge(customers, on="customer_id", how="left")
 
     return merged
 
